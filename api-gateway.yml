@@ -1,0 +1,28 @@
+server:
+  port: 8081
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/users/**
+  #        - id: payment-service
+  #          uri: http://httpbin.org
+  #          predicates:
+  #            - Path=/payments/**
+  #        - id: order-service
+  #          uri: http://httpbin.org
+  #          predicates:
+  #            - Path=/orders/**
+  application:
+    name: api-gateway
+eureka:
+  client:
+    service-url:
+      default-zone: http://127.0.0.1:8761/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+#  instance:
+#    prefer-ip-address: true
